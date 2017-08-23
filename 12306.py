@@ -28,7 +28,7 @@ from colorama import Fore
 #忽略requests 的告警
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
-headers = '次序 车次 出发车站/到达车站 出发时间/到达时间 历时 一等座 二等座 软卧 硬卧 软座 硬座 无座'.split()
+headers = '次序 车次 出发车站/到达车站 出发时间/到达时间 历时 一等座 二等座 软卧 硬卧 软座 硬座 无座 状态'.split()
 
 data_list=[]
 def trains(last):
@@ -58,7 +58,7 @@ def parse_train_data(data_list):
     '''
     d1 = {
             '0_flag': flag,
-            'a_station_nu': data_list[3],
+            'a_station_nu': colored("yellow",data_list[3]),
             'b_train_from_to': '/'.join([colored("green",stations.get_name(data_list[6])),colored("ss",stations.get_name(data_list[7]))]),
             'c_train_start_end': '/'.join([data_list[8],data_list[9]]),
             'd_use_time': data_list[10],
@@ -68,8 +68,11 @@ def parse_train_data(data_list):
             'h_yw': data_list[28] or '--',
             'i_rz': data_list[24] or '--',
             'j_yz': data_list[29] or '--',
-            'k_wz': data_list[26] or '--'
+            'k_wz': data_list[26] or '--',
+            'l_status': colored("green",data_list[1]) or '--'
         }
+    if data_list[1] == u'\u5217\u8f66\u505c\u8fd0':
+        d1['l_status'] = colored("ss",data_list[1])
     items = d1.items()
     #返回list 元素是tunple
     items.sort()
