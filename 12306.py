@@ -150,8 +150,7 @@ def check_arguments_validity():
         if '07:00:00' > tt or tt > '23:00:00':
             raise ValueError
     except:
-        print colored("s",'12306 正在维护哦，晚点再来_ ^ ^ _')
-        exit()
+        print colored("s",'12306 正在维护哦，不能买票了_ ^ ^ _')
 
 if __name__ == '__main__':
     arguments = docopt(__doc__, version='Tickets 1.0')
