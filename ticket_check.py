@@ -110,9 +110,11 @@ class CollectTrainInfo():
             for i in self.trains(self.get_info()):
                 pt.add_row(i)
             print pt
-        except :
-            print self.colored("red","Something Error Occurred! Please check your Code... exit...")
-            exit(120)      
+        except Exception  as e:
+            print e  
+        #except :
+        #    print self.colored("red","Something Error Occurred! Please check your Code... exit...")
+        #    exit(120)      
     
     def need_print(self,data_list):
         '''
@@ -156,12 +158,23 @@ class CollectTrainInfo():
             exit()
         try:
             #print self.date
-            if datetime.today().strftime('%Y-%m-%d') > self._get_leave_time(self.date) or self._get_leave_time(self.date)  > self.get_lasttime():
+            #if datetime.today().strftime('%Y-%m-%d') > self._get_leave_time(self.date) or self._get_leave_time(self.date)  > self.get_lasttime():
+            if datetime.today().strftime('%Y-%m-%d') > self._get_leave_time(self.date):
                 raise ValueError
+            elif self._get_leave_time(self.date)  > self.get_lasttime():
+                print self.colored("yellow","您输入的日期超过了预售期--")
+                exit()
+
         #except ValueError as e:
         except :
             print self.colored("s",'请输入有效日期')
             exit()
+        #try:
+        #    if self._get_leave_time(self.date)  > self.get_lasttime():
+        #        raise ValueError
+        #except :
+        #    print self.colored("yellow","您输入的日期超过了预售期--")
+        #    exit()
         try:
             if '07:00:00' > tt or tt > '23:00:00':
                 raise ValueError
