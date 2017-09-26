@@ -31,8 +31,25 @@ requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
 headers = '次序 车次 出发车站/到达车站 出发时间/到达时间 历时 一等座 二等座 软卧 硬卧 软座 硬座 无座 状态'.split()
 
+header = {
+            "Accept":"text/html,application/json,application/xml;",
+            "Accept-Encoding":"gzip",
+            "Accept-Language":"zh-CN",
+            "User-Agent":"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36"
+  }
+
+#header = {
+#           "Accept":"*/*",
+#           "Accept-Encoding":"gzip",
+#           "Accept-Language":"zh-CN",
+#           "Connection":"keep-alive",
+#           "Host":"kyfw.12306.cn"
+#           "Referer":"https://kyfw.12306.cn/otn/leftTicket/init",
+#           "User-Agent":"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36"
+#   }
+
 url = (
-        'https://kyfw.12306.cn/otn/leftTicket/query?leftTicketDTO.'
+        'https://kyfw.12306.cn/otn/leftTicket/queryX?leftTicketDTO.'
         'train_date={}&'
         'leftTicketDTO.from_station={}&'
         'leftTicketDTO.to_station={}&'
@@ -182,7 +199,9 @@ class CollectTrainInfo():
             print self.colored("s",'12306 正在维护升级时间内，不能买票了_ ^ ^ _')
     
     def get_info(self):
-        res = requests.get(self.req_url,verify=False)
+        res = requests.get(self.req_url,verify=False,timeout=20,headers=header)
+        #print res.status_code
+        #print res.text
         last = res.json()['data']['result']
         return last
         
