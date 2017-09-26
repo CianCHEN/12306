@@ -90,8 +90,9 @@ def pretty_table():
         print pt
     #except NameError as e :
         #print e
-    except :
-        print colored("red","Something Error Occurred! Please check your Code... exit...")
+    except Exception as e :
+        print e
+        #print colored("red","Something Error Occurred! Please check your Code... exit...")
         exit(120)      
 
 def need_print(data_list):
@@ -156,11 +157,21 @@ if __name__ == '__main__':
     arguments = docopt(__doc__, version='Tickets 1.0')
     options = ''.join([key for key, value in arguments.items() if value is True])
     check_arguments_validity()
-    url='https://kyfw.12306.cn/otn/leftTicket/query?leftTicketDTO.train_date={0}&leftTicketDTO.from_station={1}&leftTicketDTO.to_station={2}&purpose_codes=ADULT'.format(
+    url='https://kyfw.12306.cn/otn/leftTicket/queryX?leftTicketDTO.train_date={0}&leftTicketDTO.from_station={1}&leftTicketDTO.to_station={2}&purpose_codes=ADULT'.format(
              _get_leave_time(arguments['<date>']),stations.get_telecode(arguments['<from>']),stations.get_telecode(arguments['<to>']))
+    #print url
     #requests.packages.urllib3.disable_warnings() 
-    r=requests.get(url,verify=False)
+    header = { 
+            "Accept":"text/html,application/json,application/xml;",
+            "Accept-Encoding":"gzip",
+            "Accept-Language":"zh-CN",
+            "User-Agent":"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36",
+            }
+            #"User-Agent":"Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; WOW64; Trident/5.0)",
+
+    r=requests.get(url,verify=False,headers=header)
     arguments.items()
+    print r.text
     last=r.json()['data']['result']
     pretty_table()
 #    try:
