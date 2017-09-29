@@ -33,20 +33,13 @@ headers = '次序 车次 出发车站/到达车站 出发时间/到达时间 历
 
 header = {
             "Accept":"text/html,application/json,application/xml;",
-            "Accept-Encoding":"gzip",
-            "Accept-Language":"zh-CN",
+            "Accept-Encoding":"gzip, deflate, br",
+            "Accept-Language":"zh-CN,zh;q=0.8",
+            "Cache-Control":"max-age=0",
+            "Connection":"keep-alive",
+            "Referer":"https://kyfw.12306.cn/otn/leftTicket/init",
             "User-Agent":"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36"
-  }
-
-#header = {
-#           "Accept":"*/*",
-#           "Accept-Encoding":"gzip",
-#           "Accept-Language":"zh-CN",
-#           "Connection":"keep-alive",
-#           "Host":"kyfw.12306.cn"
-#           "Referer":"https://kyfw.12306.cn/otn/leftTicket/init",
-#           "User-Agent":"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36"
-#   }
+            }
 
 url = (
         'https://kyfw.12306.cn/otn/leftTicket/queryX?leftTicketDTO.'
