@@ -42,7 +42,7 @@ header = {
             }
 
 url = (
-        'https://kyfw.12306.cn/otn/leftTicket/queryX?leftTicketDTO.'
+        'https://kyfw.12306.cn/otn/leftTicket/query?leftTicketDTO.'
         'train_date={}&'
         'leftTicketDTO.from_station={}&'
         'leftTicketDTO.to_station={}&'
